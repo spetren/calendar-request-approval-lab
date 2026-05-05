@@ -1,0 +1,13 @@
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.zip
+*.bak
+*.local
+.env
+.env.*
+secrets/
+node_modules/
+.DS_Store
+Thumbs.db
