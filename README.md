@@ -10,24 +10,21 @@ End users chat with a Copilot Studio agent ("Book me PTO next Friday", "Add a co
 
 ## Architecture
 
+```mermaid
+flowchart LR
+    U([User]) --> A[Copilot Studio<br/>Agent]
+    A --> F1[CreateCalendarRequest<br/>flow]
+    F1 --> L[(CalendarRequests<br/>Pending)]
+    L --> F2[CalendarRequestApproval<br/>flow]
+    F2 --> AP{Approver}
+    AP -- Reject --> R[(Status = Rejected)]
+    AP -- Approve --> SW{Switch on<br/>RequestType}
+    SW -- PTO / OOO --> T[(TeamCalendar)]
+    SW -- Event --> E[(EventCalendar)]
+    SW -- Company --> C[(CompanyCalendar)]
 ```
-User ──▶ Copilot Studio Agent
-              │
-              ▼
-        CreateCalendarRequest (instant flow)
-              │
-              ▼
-        CalendarRequests (SharePoint list)
-              │
-              ▼
-        CalendarRequestApproval (automated flow)
-              │  ├─ Approval task → approver
-              │  └─ Switch on RequestType
-              ▼
-        ┌────────────┬─────────────┬───────────────┐
-   TeamCalendar  EventCalendar  CompanyCalendar
-   (PTO/OOO)     (project)      (org-wide)
-```
+
+See [docs/flow.md](docs/flow.md) for the full sequence diagram and decision flow.
 
 ## Components
 
