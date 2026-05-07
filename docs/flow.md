@@ -50,7 +50,7 @@ sequenceDiagram
 ## State / decision flow
 
 ```mermaid
-flowchart TD
+flowchart LR
     Start([User chats with agent]) --> Extract[Agent extracts<br/>RequestType, Subject,<br/>StartTime, EndTime, Notes]
     Extract --> Confirm{User confirms?}
     Confirm -- No --> Start
