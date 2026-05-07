@@ -12,6 +12,8 @@
 ## Why this shape?
 
 - **Single inbox (`CalendarRequests`)** — easy to audit and report on. All requests, regardless of type or outcome, are visible in one place.
+- **Approval only for `PTO`** — PTO has policy implications (coverage, accruals) and benefits from a manager check. `OOO`, `Event`, and `Company` requests are auto-approved and written straight through. This keeps the high-volume cases friction-free while preserving control where it matters.
+- **Dual write — SharePoint + Outlook** — the SharePoint list is the durable, queryable system of record (auditing, dashboards, group views). The Outlook event is what users actually see in their day-to-day calendar. The flow writes both via the *Office 365 Outlook* connector after each successful list insert.
 - **Separate destination lists** — different audiences, different permissions, different views (e.g. company calendar visible to all; team calendar scoped to a group).
 - **Approval in flow, not in agent** — keeps the conversational layer thin and makes the policy auditable.
 - **Switch by `RequestType`** — adding a new calendar type is a one-branch change, no agent retraining required.

@@ -16,13 +16,21 @@ flowchart LR
     A --> F1[CreateCalendarRequest<br/>flow]
     F1 --> L[(CalendarRequests<br/>Pending)]
     L --> F2[CalendarRequestApproval<br/>flow]
-    F2 --> AP{Approver}
+    F2 --> NA{PTO?}
+    NA -- Yes --> AP{Approver}
     AP -- Reject --> R[(Status = Rejected)]
     AP -- Approve --> SW{Switch on<br/>RequestType}
+    NA -- No<br/>OOO / Event / Company --> SW
     SW -- PTO / OOO --> T[(TeamCalendar)]
     SW -- Event --> E[(EventCalendar)]
     SW -- Company --> C[(CompanyCalendar)]
+    T --> OL[Outlook event]
+    E --> OL
+    C --> OL
 ```
+
+> **Approval rule:** only `PTO` requests go through the approver; `OOO`, `Event`, and `Company` are written directly.
+> **Dual write:** every approved request creates both a SharePoint list item AND an Outlook calendar event.
 
 See [docs/flow.md](docs/flow.md) for the full sequence diagram and decision flow.
 
